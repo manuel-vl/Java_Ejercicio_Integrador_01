@@ -13,11 +13,11 @@ public class Factura {
     public Factura() {
     }
 
-    public Factura(String codigo, Cliente client, List<Item> items, Double total) {
+    public Factura(String codigo, Cliente client, List<Item> items) {
         this.codigo = codigo;
         this.client = client;
         this.items = items;
-        this.total = total;
+        this.total = this.calcularTotal();
     }
 
     public String getCodigo() {
@@ -50,5 +50,25 @@ public class Factura {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "Factura{" +
+                "codigo='" + codigo + '\'' +
+                ", client=" + client +
+                ", items=" + items +
+                ", total=" + total +
+                '}';
+    }
+
+    public Double calcularTotal(){
+        double total=0;
+
+        for(Item item: items){
+            total+=item.getPrecio();
+        }
+
+        return total;
     }
 }
